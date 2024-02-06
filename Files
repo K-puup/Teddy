@@ -1,0 +1,105 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIF Background Example</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: url('your-gif-file.gif') center/cover fixed;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: #ff3366;
+            margin-top: 50px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            transition: font-size 0.3s, box-shadow 0.3s, transform 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+
+        #yesButton {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        #noButton {
+            background-color: #f44336;
+            color: white;
+        }
+
+        #noButton.evade {
+            animation: evade 2s infinite;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        #thankYouPopup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Will you be my Valentine?</h1>
+
+    <button id="yesButton" onclick="showThankYou()">Yes</button>
+    <button id="noButton" onclick="increaseSizeAndEvade('noButton')">No</button>
+
+    <div id="thankYouPopup">
+        <p>Thank you for being my Valentine!</p>
+        <button onclick="closeThankYou()">Close</button>
+    </div>
+
+    <script>
+        function increaseSize(buttonId) {
+            const yesButton = document.getElementById('yesButton');
+            const noButton = document.getElementById('noButton');
+
+            if (buttonId === 'noButton') {
+                const currentSize = window.getComputedStyle(yesButton).fontSize;
+                const newSize = (parseFloat(currentSize) + 2) + 'px';
+                yesButton.style.fontSize = newSize;
+            }
+        }
+
+        function increaseSizeAndEvade(buttonId) {
+            increaseSize(buttonId);
+
+            const noButton = document.getElementById('noButton');
+            noButton.classList.add('evade');
+        }
+
+        function showThankYou() {
+            const thankYouPopup = document.getElementById('thankYouPopup');
+            thankYouPopup.style.display = 'block';
+        }
+
+        function closeThankYou() {
+            const thankYouPopup = document.getElementById('thankYouPopup');
+            thankYouPopup.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
